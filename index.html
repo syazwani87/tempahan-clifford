@@ -1,3 +1,8 @@
+Okey Cikgu, saya sudah siapkan kod HTML yang siap sedia dengan URL Apps Script Cikgu. Cikgu tak perlu taip apa-apa lagi.
+
+Cikgu hanya perlu salin semua (Copy All) kod di bawah ini dan tampal (Paste) ke dalam fail index.html di GitHub Cikgu.
+
+HTML
 <!DOCTYPE html>
 <html lang="ms">
 <head>
@@ -7,8 +12,7 @@
     <style>
         body { font-family: 'Segoe UI', sans-serif; padding: 15px; background: #f0f2f5; }
         .card { background: white; padding: 25px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); max-width: 550px; margin: auto; }
-        h2 { text-align: center; color: #1a73e8; font-size: 1.2em; text-transform: uppercase; margin-bottom: 10px; }
-        .btn-semak { display: block; text-align: center; background: #34a853; color: white; padding: 12px; text-decoration: none; border-radius: 8px; font-weight: bold; margin-bottom: 20px; font-size: 14px; }
+        h2 { text-align: center; color: #1a73e8; font-size: 1.2em; text-transform: uppercase; margin-bottom: 20px; }
         label { display: block; margin-top: 15px; font-weight: bold; font-size: 13px; color: #444; }
         select, input[type="text"], input[type="date"] { width: 100%; padding: 12px; margin-top: 5px; border: 1px solid #dadce0; border-radius: 8px; box-sizing: border-box; }
         .slot-container { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
@@ -19,18 +23,67 @@
         .nilam-tag { color: #d93025; font-weight: bold; font-size: 10px; display: block; margin-top: 2px; }
         .petang { background: #e8f0fe; border-color: #1a73e8; grid-column: span 2; }
         button { width: 100%; padding: 15px; background: #1a73e8; color: white; border: none; border-radius: 8px; margin-top: 25px; cursor: pointer; font-weight: bold; font-size: 16px; }
+        button:disabled { background: #ccc; }
+        .list-section { margin-top: 30px; border-top: 2px solid #eee; padding-top: 20px; }
+        .list-title { font-weight: bold; color: #444; margin-bottom: 10px; text-align: center; border-bottom: 2px solid #1a73e8; display: block; padding-bottom: 5px; }
+        .tempahan-item { background: #fff; border: 1px solid #ddd; padding: 10px; border-radius: 8px; margin-bottom: 10px; font-size: 12px; line-height: 1.4; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .tempahan-item b { color: #1a73e8; }
     </style>
 </head>
 <body>
 
 <div class="card">
-    <a href="https://docs.google.com/spreadsheets/d/1O7B1EMvFNmWMuaQ4M3Tw-ReXzvJVDD9x3Xlk3tsKgfw/edit?usp=sharing" target="_blank" class="btn-semak">
-        📅 SEMAK REKOD TEMPAHAN DI SINI
-    </a>
-
     <h2>BORANG TEMPAHAN BILIK KHAS<br>SK CLIFFORD 2026</h2>
     
     <form id="tempahanForm">
+        <label>Nama Guru:</label>
+        <select id="namaGuru" required>
+            <option value="">-- Pilih Nama Guru --</option>
+            <option value="ROHADI BIN KAMALUDIN">ROHADI BIN KAMALUDIN</option>
+            <option value="LUKMAN HAKIM BIN ABDULLAH">LUKMAN HAKIM BIN ABDULLAH</option>
+            <option value="JAMILAH BINTI LUDIN">JAMILAH BINTI LUDIN</option>
+            <option value="NOR JULIANI BINTI OTHMAN">NOR JULIANI BINTI OTHMAN</option>
+            <option value="AZMEER FIRDAUS BIN ISKANDAR">AZMEER FIRDAUS BIN ISKANDAR</option>
+            <option value="DG. ZAHARAH BINTI JAAFAR">DG. ZAHARAH BINTI JAAFAR</option>
+            <option value="DORA BINTI SAAT">DORA BINTI SAAT</option>
+            <option value="FATIMAH BINTI DOLLAH">FATIMAH BINTI DOLLAH</option>
+            <option value="FILZAH HANANI BINTI MUHAMAD">FILZAH HANANI BINTI MUHAMAD</option>
+            <option value="HELDA BINTI ABD MOEN">HELDA BINTI ABD MOEN</option>
+            <option value="IRDAWATY BINTI MOHD BOKHARI">IRDAWATY BINTI MOHD BOKHARI</option>
+            <option value="JAFNI BIN ABU BAKAR">JAFNI BIN ABU BAKAR</option>
+            <option value="JUNAIDAH BINTI ABDUL LANI">JUNAIDAH BINTI ABDUL LANI</option>
+            <option value="KHUSAINI BIN MD YUSOFF">KHUSAINI BIN MD YUSOFF</option>
+            <option value="MAIZATUL ULLAYA BINTI YUSOP@OTHMAN">MAIZATUL ULLAYA BINTI YUSOP@OTHMAN</option>
+            <option value="MARSITAH BINTI IBRAHIM">MARSITAH BINTI IBRAHIM</option>
+            <option value="MOHAMMAD SAFWAN BIN NORAZAMI">MOHAMMAD SAFWAN BIN NORAZAMI</option>
+            <option value="MOHD AMRAN BIN MOHD ZAWAWI">MOHD AMRAN BIN MOHD ZAWAWI</option>
+            <option value="MOHD FIRDAUS BIN AB GHANI">MOHD FIRDAUS BIN AB GHANI</option>
+            <option value="MUHAMAD SHUKRAN BIN ABU BAKAR">MUHAMAD SHUKRAN BIN ABU BAKAR</option>
+            <option value="NAZURAH BINTI KASMIAN">NAZURAH BINTI KASMIAN</option>
+            <option value="NOR DIANA BINTI AB GHANI">NOR DIANA BINTI AB GHANI</option>
+            <option value="NOR ZAILIKA BINTI ZAINAL">NOR ZAILIKA BINTI ZAINAL</option>
+            <option value="NURZALINA BINTI RAMLI">NURZALINA BINTI RAMLI</option>
+            <option value="NORAZIAN BINTI DAUT">NORAZIAN BINTI DAUT</option>
+            <option value="NORFILAH BINTI SABUDIN">NORFILAH BINTI SABUDIN</option>
+            <option value="NORHAYATI BINTI SHARIF HASSAN">NORHAYATI BINTI SHARIF HASSAN</option>
+            <option value="NORLAILA BINTI MOHAMED AMIN">NORLAILA BINTI MOHAMED AMIN</option>
+            <option value="NURUL HAFIZAH BINTI AHMAD">NURUL HAFIZAH BINTI AHMAD</option>
+            <option value="NURUL SYAZWANI BINTI ABIDIN">NURUL SYAZWANI BINTI ABIDIN</option>
+            <option value="RAWAIDA BINTI MOHD BAHARIN">RAWAIDA BINTI MOHD BAHARIN</option>
+            <option value="ROHANA BINTI ESA">ROHANA BINTI ESA</option>
+            <option value="ROZIHAN BINTI MOHD AKIL">ROZIHAN BINTI MOHD AKIL</option>
+            <option value="SHUHAIDA BINTI IBRAHIM">SHUHAIDA BINTI IBRAHIM</option>
+            <option value="SITI SAPINAH BINTI AWANG">SITI SAPINAH BINTI AWANG</option>
+            <option value="SITI ZANARIAH BT MOHAMED">SITI ZANARIAH BT MOHAMED</option>
+            <option value="SHARIFAH HALIMATUN SYAKDIAH BINTI SYED ABDULLAH">SHARIFAH HALIMATUN SYAKDIAH BINTI SYED ABDULLAH</option>
+            <option value="T.YUSNOR BIN T. YUSOF">T.YUSNOR BIN T. YUSOF</option>
+            <option value="WAN KAMARUL FARIZA BT WAN KAMARUZAMAN">WAN KAMARUL FARIZA BT WAN KAMARUZAMAN</option>
+            <option value="YUSRA NABILAH BINTI YUSOFF">YUSRA NABILAH BINTI YUSOFF</option>
+            <option value="ZANOORFADILLAH BT ISMAIL">ZANOORFADILLAH BT ISMAIL</option>
+            <option value="ZUBAIDAH BINTI ABD RAHMAN">ZUBAIDAH BINTI ABD RAHMAN</option>
+            <option value="ZULAZHA BIN AB KADIR">ZULAZHA BIN AB KADIR</option>
+        </select>
+
         <label>Pilih Bilik:</label>
         <select id="bilik" onchange="kemaskiniSlot()" required>
             <option value="">-- Pilih Bilik --</option>
@@ -45,32 +98,31 @@
         <label id="labelWaktu" style="display:none;">Pilih Waktu (Maksimum 3 Slot):</label>
         <div id="slotGrid" class="slot-container"></div>
 
-        <label>Nama Guru:</label>
-        <input type="text" id="namaGuru" placeholder="Masukkan nama anda" required>
-
         <label>Tujuan / Kelas:</label>
         <input type="text" id="tujuan" placeholder="Cth: PdPC Sains 5K" required>
 
-        <button type="button" onclick="hantar()">HANTAR TEMPAHAN</button>
+        <button type="button" id="submitBtn" onclick="hantar()">HANTAR TEMPAHAN</button>
     </form>
+
+    <div class="list-section">
+        <div class="list-title">SENARAI TEMPAHAN TERKINI</div>
+        <div id="senaraiTempahan">
+            <p style="text-align:center; color:#999; font-size:12px;">Memuatkan data...</p>
+        </div>
+    </div>
 </div>
 
 <script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbxtE3jtZzB9hcTyirBOaN4T_FRjq7jYWPq4icMzJ6lt2bmKpSjvCbSWmaJl-giErgt3/exec';
     const masa = ["","07:35-08:05","08:05-08:35","08:35-09:05","09:05-09:35","10:05-10:35","10:35-11:05","11:05-11:35","11:35-12:05","12:05-12:35","12:35-01:05","01:05-01:35","01:35-02:05"];
-    
-    // Data Jadual NILAM
-    const jadualBM = {"Isnin":{5:"3A",6:"3A",7:"1A",8:"1A",10:"4A",11:"4A"},"Selasa":{1:"6E",2:"6E",6:"4K",7:"4K",9:"6K",10:"6K",11:"6A",12:"6A"},"Rabu":{1:"4E",2:"4E",3:"2A",4:"2A",5:"3K",6:"3K",7:"5A",8:"5A",9:"1E",10:"1E"},"Khamis":{1:"2E",2:"2E",5:"1K",6:"1K",10:"5E",11:"5E"},"Jumaat":{3:"2K",4:"2K",5:"3E",6:"3E",7:"5K",8:"5K"}};
-    const jadualBI = {"Isnin":{4:"5K",5:"5K",8:"2E",9:"2E",10:"2A",11:"2A"},"Selasa":{2:"4K",3:"4K",5:"1A",6:"1A",7:"6K",8:"6K",10:"3E",11:"3E"},"Rabu":{4:"5A",5:"5A",6:"4E",7:"4E",9:"3K",10:"3K"},"Khamis":{3:"4A",4:"4A",5:"3A",6:"3A",7:"5E",8:"5E",9:"1K",10:"1K"},"Jumaat":{2:"6A",3:"6A",4:"6E",5:"6E",6:"2K",7:"2K",8:"1E",9:"1E"}};
 
     function kemaskiniSlot() {
         const bilik = document.getElementById('bilik').value;
         const tarikh = document.getElementById('tarikh').value;
         const container = document.getElementById('slotGrid');
         const labelWaktu = document.getElementById('labelWaktu');
-        
         container.innerHTML = "";
         if (!bilik || !tarikh) { labelWaktu.style.display = "none"; return; }
-        
         labelWaktu.style.display = "block";
         const d = new Date(tarikh);
         const hari = ["Ahad","Isnin","Selasa","Rabu","Khamis","Jumaat","Sabtu"][d.getDay()];
@@ -80,49 +132,54 @@
 
         for (let i = 1; i <= 12; i++) {
             let infoNILAM = "";
-            let data = isGanjil ? jadualBI[hari] : jadualBM[hari];
-            
-            // Nota NILAM hanya untuk PSS dan Makmal
-            if ((bilik === "Makmal Komputer" || bilik === "Pusat Sumber") && data && data[i]) {
-                infoNILAM = `<span class="nilam-tag">NILAM ${isGanjil?'BI':'BM'}: ${data[i]}</span>`;
+            let jadual = isGanjil ? {"Isnin":{4:"5K",5:"5K",8:"2E",9:"2E",10:"2A",11:"2A"},"Selasa":{2:"4K",3:"4K",5:"1A",6:"1A",7:"6K",8:"6K",10:"3E",11:"3E"},"Rabu":{4:"5A",5:"5A",6:"4E",7:"4E",9:"3K",10:"3K"},"Khamis":{3:"4A",4:"4A",5:"3A",6:"3A",7:"5E",8:"5E",9:"1K",10:"1K"},"Jumaat":{2:"6A",3:"6A",4:"6E",5:"6E",6:"2K",7:"2K",8:"1E",9:"1E"}} : {"Isnin":{5:"3A",6:"3A",7:"1A",8:"1A",10:"4A",11:"4A"},"Selasa":{1:"6E",2:"6E",6:"4K",7:"4K",9:"6K",10:"6K",11:"6A",12:"6A"},"Rabu":{1:"4E",2:"4E",3:"2A",4:"2A",5:"3K",6:"3K",7:"5A",8:"5A",9:"1E",10:"1E"},"Khamis":{1:"2E",2:"2E",5:"1K",6:"1K",10:"5E",11:"5E"},"Jumaat":{3:"2K",4:"2K",5:"3E",6:"3E",7:"5K",8:"5K"}};
+            if ((bilik === "Makmal Komputer" || bilik === "Pusat Sumber") && jadual[hari] && jadual[hari][i]) {
+                infoNILAM = `<span class="nilam-tag">NILAM ${isGanjil?'BI':'BM'}: ${jadual[hari][i]}</span>`;
             }
-            
-            container.innerHTML += `
-                <label class="slot-item">
-                    <input type="checkbox" name="sw" value="Waktu ${i}" onchange="had(this)">
-                    <div>
-                        <span class="slot-label">Waktu ${i}</span>
-                        <span class="slot-info">${masa[i]}</span>
-                        ${infoNILAM}
-                    </div>
-                </label>`;
+            container.innerHTML += `<label class="slot-item"><input type="checkbox" name="sw" value="Waktu ${i}" onchange="had(this)"><div><span class="slot-label">Waktu ${i}</span><span class="slot-info">${masa[i]}</span>${infoNILAM}</div></label>`;
         }
-        
-        container.innerHTML += `
-            <label class="slot-item petang">
-                <input type="checkbox" name="sw" value="Lepas Sekolah" onchange="had(this)">
-                <div>
-                    <span class="slot-label">SELEPAS WAKTU SEKOLAH</span>
-                    <span class="slot-info">02:05 petang ke atas</span>
-                </div>
-            </label>`;
+        container.innerHTML += `<label class="slot-item petang"><input type="checkbox" name="sw" value="Lepas Sekolah" onchange="had(this)"><div><span class="slot-label">SELEPAS WAKTU SEKOLAH</span><span class="slot-info">02:05 petang ke atas</span></div></label>`;
     }
 
     function had(cb) {
-        if (document.querySelectorAll('input[name="sw"]:checked').length > 3) {
-            alert("Maksimum 3 slot sahaja dibenarkan.");
-            cb.checked = false;
-        }
+        if (document.querySelectorAll('input[name="sw"]:checked').length > 3) { alert("Maksimum 3 slot."); cb.checked = false; }
+    }
+
+    async function muatSenarai() {
+        try {
+            const res = await fetch(scriptURL + "?action=read");
+            const data = await res.json();
+            const div = document.getElementById('senaraiTempahan');
+            div.innerHTML = "";
+            if (data.length === 0) { div.innerHTML = "<p style='text-align:center'>Tiada tempahan.</p>"; return; }
+            data.slice().reverse().forEach(item => {
+                div.innerHTML += `<div class="tempahan-item"><b>${item.tarikh}</b> | ${item.bilik}<br>Guru: ${item.nama}<br>Waktu: ${item.waktu} | Tujuan: ${item.tujuan}</div>`;
+            });
+        } catch (e) { document.getElementById('senaraiTempahan').innerHTML = "<p>Menunggu tempahan pertama...</p>"; }
     }
 
     function hantar() {
-        const terpilih = Array.from(document.querySelectorAll('input[name="sw"]:checked')).map(c => c.value);
-        if (terpilih.length === 0) { alert("Sila pilih sekurang-kurangnya 1 waktu."); return; }
-        alert("Tempahan anda telah direkodkan. Terima Kasih");
-        document.getElementById('tempahanForm').reset();
-        document.getElementById('slotGrid').innerHTML = "";
-        document.getElementById('labelWaktu').style.display = "none";
+        const btn = document.getElementById('submitBtn');
+        const payload = {
+            nama: document.getElementById('namaGuru').value,
+            bilik: document.getElementById('bilik').value,
+            tarikh: document.getElementById('tarikh').value,
+            tujuan: document.getElementById('tujuan').value,
+            waktu: Array.from(document.querySelectorAll('input[name="sw"]:checked')).map(c => c.value).join(", ")
+        };
+        if (!payload.nama || !payload.bilik || !payload.tarikh || !payload.tujuan || !payload.waktu) { alert("Sila lengkapkan borang."); return; }
+        
+        btn.disabled = true; btn.innerText = "Menghantar...";
+        fetch(scriptURL, { method: 'POST', body: JSON.stringify(payload) })
+        .then(() => { 
+            alert("Tempahan Berjaya!"); 
+            document.getElementById('tempahanForm').reset(); 
+            document.getElementById('slotGrid').innerHTML = ""; 
+            muatSenarai(); 
+        })
+        .finally(() => { btn.disabled = false; btn.innerText = "HANTAR TEMPAHAN"; });
     }
+    window.onload = muatSenarai;
 </script>
 </body>
 </html>
