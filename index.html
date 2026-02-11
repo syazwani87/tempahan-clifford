@@ -6,47 +6,48 @@
     <title>BORANG TEMPAHAN BILIK KHAS SK CLIFFORD 2026</title>
     <style>
         body { font-family: 'Segoe UI', sans-serif; padding: 15px; background: #f0f2f5; }
-        .card { background: white; padding: 25px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); max-width: 500px; margin: auto; }
-        h2 { text-align: center; color: #1a73e8; font-size: 1.2em; text-transform: uppercase; line-height: 1.4; }
+        .card { background: white; padding: 25px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); max-width: 550px; margin: auto; }
+        h2 { text-align: center; color: #1a73e8; font-size: 1.2em; text-transform: uppercase; margin-bottom: 10px; }
+        .btn-semak { display: block; text-align: center; background: #34a853; color: white; padding: 12px; text-decoration: none; border-radius: 8px; font-weight: bold; margin-bottom: 20px; font-size: 14px; }
+        .btn-semak:hover { background: #2d9147; }
         label { display: block; margin-top: 15px; font-weight: bold; font-size: 13px; color: #444; }
-        select, input { width: 100%; padding: 12px; margin-top: 5px; border: 1px solid #dadce0; border-radius: 8px; box-sizing: border-box; font-size: 14px; }
-        .status-box { padding: 15px; border-radius: 8px; margin-top: 20px; font-size: 14px; display: none; line-height: 1.5; border-left: 6px solid; }
-        .occupied { background: #fff3cd; border-color: #ffc107; color: #856404; }
-        .available { background: #d4edda; border-color: #28a745; color: #155724; }
+        select, input[type="text"], input[type="date"] { width: 100%; padding: 12px; margin-top: 5px; border: 1px solid #dadce0; border-radius: 8px; box-sizing: border-box; }
+        .slot-container { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+        .slot-item { background: #f8f9fa; border: 1px solid #dee2e6; padding: 10px; border-radius: 8px; display: flex; align-items: flex-start; cursor: pointer; }
+        .slot-item input { margin-right: 10px; margin-top: 3px; }
+        .slot-info { font-size: 11px; color: #666; display: block; }
+        .slot-label { font-size: 13px; font-weight: bold; display: block; }
+        .nilam-tag { color: #d93025; font-weight: bold; font-size: 10px; display: block; margin-top: 2px; }
+        .petang { background: #e8f0fe; border-color: #1a73e8; grid-column: span 2; }
         button { width: 100%; padding: 15px; background: #1a73e8; color: white; border: none; border-radius: 8px; margin-top: 25px; cursor: pointer; font-weight: bold; font-size: 16px; }
     </style>
 </head>
 <body>
 
 <div class="card">
+    <a href="https://docs.google.com/spreadsheets/d/1O7B1EMvFNmWMuaQ4M3Tw-ReXzvJVDD9x3Xlk3tsKgfw/edit?usp=sharing" target="_blank" class="btn-semak">
+        📅 SEMAK REKOD TEMPAHAN DI SINI
+    </a>
+
     <h2>BORANG TEMPAHAN BILIK KHAS<br>SK CLIFFORD 2026</h2>
     
     <form id="tempahanForm">
         <label>Pilih Bilik:</label>
-        <select id="bilik" onchange="semakJadual()" required>
+        <select id="bilik" onchange="kemaskiniSlot()" required>
             <option value="">-- Pilih Bilik --</option>
             <option value="Makmal Komputer">Makmal Komputer</option>
             <option value="Pusat Sumber">Pusat Sumber (PSS)</option>
+            <option value="Studio CliPS Channel">Studio CliPS Channel</option>
         </select>
 
         <label>Tarikh Penggunaan:</label>
-        <input type="date" id="tarikh" onchange="semakJadual()" required>
+        <input type="date" id="tarikh" onchange="kemaskiniSlot()" required>
 
-        <label>Pilih Waktu (Slot):</label>
-        <select id="slot" onchange="semakJadual()" required>
-            <option value="">-- Pilih Slot --</option>
-            <option value="1">Waktu 1</option><option value="2">Waktu 2</option>
-            <option value="3">Waktu 3</option><option value="4">Waktu 4</option>
-            <option value="5">Waktu 5</option><option value="6">Waktu 6</option>
-            <option value="7">Waktu 7</option><option value="8">Waktu 8</option>
-            <option value="9">Waktu 9</option><option value="10">Waktu 10</option>
-            <option value="11">Waktu 11</option><option value="12">Waktu 12</option>
-        </select>
-
-        <div id="infoBox" class="status-box"></div>
+        <label id="labelWaktu" style="display:none;">Pilih Waktu (Maksimum 3 Slot):</label>
+        <div id="slotGrid" class="slot-container"></div>
 
         <label>Nama Guru:</label>
-        <input type="text" id="namaGuru" placeholder="Nama anda" required>
+        <input type="text" id="namaGuru" placeholder="Masukkan nama anda" required>
 
         <label>Tujuan / Kelas:</label>
         <input type="text" id="tujuan" placeholder="Cth: PdPC Sains 5K" required>
@@ -56,54 +57,74 @@
 </div>
 
 <script>
-    const jadualBM = { // GENAP
-        "Isnin": {5:"3A", 6:"3A", 7:"1A", 8:"1A", 10:"4A", 11:"4A"},
-        "Selasa": {1:"6E", 2:"6E", 6:"4K", 7:"4K", 9:"6K", 10:"6K", 11:"6A", 12:"6A"},
-        "Rabu": {1:"4E", 2:"4E", 3:"2A", 4:"2A", 5:"3K", 6:"3K", 7:"5A", 8:"5A", 9:"1E", 10:"1E"},
-        "Khamis": {1:"2E", 2:"2E", 5:"1K", 6:"1K", 10:"5E", 11:"5E"},
-        "Jumaat": {3:"2K", 4:"2K", 5:"3E", 6:"3E", 7:"5K", 8:"5K"}
-    };
+    const masa = ["","07:35-08:05","08:05-08:35","08:35-09:05","09:05-09:35","10:05-10:35","10:35-11:05","11:05-11:35","11:35-12:05","12:05-12:35","12:35-01:05","01:05-01:35","01:35-02:05"];
+    
+    // Data Jadual NILAM dari Gambar
+    const jadualBM = {"Isnin":{5:"3A",6:"3A",7:"1A",8:"1A",10:"4A",11:"4A"},"Selasa":{1:"6E",2:"6E",6:"4K",7:"4K",9:"6K",10:"6K",11:"6A",12:"6A"},"Rabu":{1:"4E",2:"4E",3:"2A",4:"2A",5:"3K",6:"3K",7:"5A",8:"5A",9:"1E",10:"1E"},"Khamis":{1:"2E",2:"2E",5:"1K",6:"1K",10:"5E",11:"5E"},"Jumaat":{3:"2K",4:"2K",5:"3E",6:"3E",7:"5K",8:"5K"}};
+    const jadualBI = {"Isnin":{4:"5K",5:"5K",8:"2E",9:"2E",10:"2A",11:"2A"},"Selasa":{2:"4K",3:"4K",5:"1A",6:"1A",7:"6K",8:"6K",10:"3E",11:"3E"},"Rabu":{4:"5A",5:"5A",6:"4E",7:"4E",9:"3K",10:"3K"},"Khamis":{3:"4A",4:"4A",5:"3A",6:"3A",7:"5E",8:"5E",9:"1K",10:"1K"},"Jumaat":{2:"6A",3:"6A",4:"6E",5:"6E",6:"2K",7:"2K",8:"1E",9:"1E"}};
 
-    const jadualBI = { // GANJIL
-        "Isnin": {4:"5K", 5:"5K", 8:"2E", 9:"2E", 10:"2A", 11:"2A"},
-        "Selasa": {2:"4K", 3:"4K", 5:"1A", 6:"1A", 7:"6K", 8:"6K", 10:"3E", 11:"3E"},
-        "Rabu": {4:"5A", 5:"5A", 6:"4E", 7:"4E", 9:"3K", 10:"3K"},
-        "Khamis": {3:"4A", 4:"4A", 5:"3A", 6:"3A", 7:"5E", 8:"5E", 9:"1K", 10:"1K"},
-        "Jumaat": {2:"6A", 3:"6A", 4:"6E", 5:"6E", 6:"2K", 7:"2K", 8:"1E", 9:"1E"}
-    };
-
-    function semakJadual() {
+    function kemaskiniSlot() {
         const bilik = document.getElementById('bilik').value;
         const tarikh = document.getElementById('tarikh').value;
-        const slot = document.getElementById('slot').value;
-        const infoBox = document.getElementById('infoBox');
-
-        if (!bilik || !tarikh || !slot) { infoBox.style.display = "none"; return; }
-
+        const container = document.getElementById('slotGrid');
+        const labelWaktu = document.getElementById('labelWaktu');
+        
+        container.innerHTML = "";
+        if (!bilik || !tarikh) { labelWaktu.style.display = "none"; return; }
+        
+        labelWaktu.style.display = "block";
         const d = new Date(tarikh);
-        const hariArr = ["Ahad", "Isnin", "Selasa", "Rabu", "Khamis", "Jumaat", "Sabtu"];
-        const hari = hariArr[d.getDay()];
+        const hari = ["Ahad","Isnin","Selasa","Rabu","Khamis","Jumaat","Sabtu"][d.getDay()];
         const mula = new Date("2026-01-12");
         const minggu = Math.floor((d - mula) / (7 * 24 * 60 * 60 * 1000)) + 1;
+        const isGanjil = minggu % 2 !== 0;
 
-        let kelasInfo = (minggu % 2 !== 0) ? 
-            (jadualBI[hari] ? jadualBI[hari][slot] : null) : 
-            (jadualBM[hari] ? jadualBM[hari][slot] : null);
+        for (let i = 1; i <= 12; i++) {
+            let infoNILAM = "";
+            let data = isGanjil ? jadualBI[hari] : jadualBM[hari];
+            
+            // Nota NILAM hanya untuk PSS dan Makmal
+            if ((bilik === "Makmal Komputer" || bilik === "Pusat Sumber") && data && data[i]) {
+                infoNILAM = `<span class="nilam-tag">NILAM ${isGanjil?'BI':'BM'}: ${data[i]}</span>`;
+            }
+            
+            container.innerHTML += `
+                <label class="slot-item">
+                    <input type="checkbox" name="sw" value="Waktu ${i}" onchange="had(this)">
+                    <div>
+                        <span class="slot-label">Waktu ${i}</span>
+                        <span class="slot-info">${masa[i]}</span>
+                        ${infoNILAM}
+                    </div>
+                </label>`;
+        }
+        
+        // Slot Tambahan Selepas Sekolah
+        container.innerHTML += `
+            <label class="slot-item petang">
+                <input type="checkbox" name="sw" value="Lepas Sekolah" onchange="had(this)">
+                <div>
+                    <span class="slot-label">SELEPAS WAKTU SEKOLAH</span>
+                    <span class="slot-info">02:05 petang ke atas</span>
+                </div>
+            </label>`;
+    }
 
-        infoBox.style.display = "block";
-        if (kelasInfo) {
-            infoBox.className = "status-box occupied";
-            infoBox.innerHTML = `⚠️ <b>AMARAN:</b> Slot Waktu ${slot} hari ${hari} (Minggu ${minggu}) diisi oleh <b>Kelas ${kelasInfo} (NILAM)</b>.`;
-        } else {
-            infoBox.className = "status-box available";
-            infoBox.innerHTML = `✅ Slot Waktu ${slot} hari ${hari} tersedia.`;
+    function had(cb) {
+        if (document.querySelectorAll('input[name="sw"]:checked').length > 3) {
+            alert("Maksimum 3 slot sahaja dibenarkan.");
+            cb.checked = false;
         }
     }
 
     function hantar() {
+        const terpilih = Array.from(document.querySelectorAll('input[name="sw"]:checked')).map(c => c.value);
+        if (terpilih.length === 0) { alert("Sila pilih sekurang-kurangnya 1 waktu."); return; }
+        
         alert("Tempahan anda telah direkodkan. Terima Kasih");
         document.getElementById('tempahanForm').reset();
-        document.getElementById('infoBox').style.display = "none";
+        document.getElementById('slotGrid').innerHTML = "";
+        document.getElementById('labelWaktu').style.display = "none";
     }
 </script>
 </body>
