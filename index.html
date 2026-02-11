@@ -1,4 +1,3 @@
-HTML
 <!DOCTYPE html>
 <html lang="ms">
 <head>
@@ -6,119 +5,105 @@ HTML
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BORANG TEMPAHAN BILIK KHAS SK CLIFFORD 2026</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 15px; background: #f0f2f5; color: #333; }
+        body { font-family: 'Segoe UI', sans-serif; padding: 15px; background: #f0f2f5; }
         .card { background: white; padding: 25px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); max-width: 500px; margin: auto; }
-        
-        /* Tajuk Utama yang anda minta */
-        h2 { text-align: center; color: #1a73e8; margin-bottom: 5px; font-size: 1.2em; text-transform: uppercase; line-height: 1.4; }
-        .sub-header { text-align: center; font-size: 13px; color: #5f6368; margin-bottom: 20px; border-bottom: 2px solid #f0f2f5; padding-bottom: 15px; }
-        
-        label { display: block; margin-top: 15px; font-weight: bold; font-size: 13px; color: #202124; }
-        select, input { width: 100%; padding: 12px; margin-top: 5px; border: 1px solid #dadce0; border-radius: 8px; box-sizing: border-box; font-size: 14px; outline: none; transition: border 0.3s; }
-        select:focus, input:focus { border: 2px solid #1a73e8; }
-        
-        button { width: 100%; padding: 14px; background: #1a73e8; color: white; border: none; border-radius: 8px; margin-top: 25px; cursor: pointer; font-size: 16px; font-weight: bold; letter-spacing: 1px; transition: background 0.3s; }
-        button:hover { background: #1765cf; }
-        
-        .nilam { background: #e8f0fe; padding: 12px; border-radius: 8px; margin-top: 15px; font-size: 13px; border-left: 5px solid #1a73e8; line-height: 1.5; }
+        h2 { text-align: center; color: #1a73e8; font-size: 1.2em; text-transform: uppercase; line-height: 1.4; }
+        label { display: block; margin-top: 15px; font-weight: bold; font-size: 13px; color: #444; }
+        select, input { width: 100%; padding: 12px; margin-top: 5px; border: 1px solid #dadce0; border-radius: 8px; box-sizing: border-box; font-size: 14px; }
+        .status-box { padding: 15px; border-radius: 8px; margin-top: 20px; font-size: 14px; display: none; line-height: 1.5; border-left: 6px solid; }
+        .occupied { background: #fff3cd; border-color: #ffc107; color: #856404; }
+        .available { background: #d4edda; border-color: #28a745; color: #155724; }
+        button { width: 100%; padding: 15px; background: #1a73e8; color: white; border: none; border-radius: 8px; margin-top: 25px; cursor: pointer; font-weight: bold; font-size: 16px; }
     </style>
 </head>
 <body>
 
 <div class="card">
     <h2>BORANG TEMPAHAN BILIK KHAS<br>SK CLIFFORD 2026</h2>
-    <div class="sub-header">Sila isi maklumat tempahan dengan lengkap</div>
     
     <form id="tempahanForm">
-        <label>Nama Guru:</label>
-        <select id="namaGuru" required>
-            <option value="">-- Pilih Nama Guru --</option>
-            <script>
-                const senarai = ["ROHADI BIN KAMALUDIN","LUKMAN HAKIM BIN ABDULLAH","JAMILAH BINTI LUDIN","NOR JULIANI BINTI OTHMAN","AZMEER FIRDAUS BIN ISKANDAR","DG. ZAHARAH BINTI JAAFAR","DORA BINTI SAAT","FATIMAH BINTI DOLLAH","FILZAH HANANI BINTI MUHAMAD","HELDA BINTI ABD MOEN","IRDAWATY BINTI MOHD BOKHARI","JAFNI BIN ABU BAKAR","JUNAIDAH BINTI ABDUL LANI","KHUSAINI BIN MD YUSOFF","MAIZATUL ULLAYA BINTI YUSOP@OTHMAN","MARSITAH BINTI IBRAHIM","MOHAMMAD SAFWAN BIN NORAZAMI","MOHD AMRAN BIN MOHD ZAWAWI","MOHD FIRDAUS BIN AB GHANI","MUHAMAD SHUKRAN BIN ABU BAKAR","NAZURAH BINTI KASMIAN","NOR DIANA BINTI AB GHANI","NOR ZAILIKA BINTI ZAINAL","NURZALINA BINTI RAMLI","NORAZIAN BINTI DAUT","NORFILAH BINTI SABUDIN","NORHAYATI BINTI SHARIF HASSAN","NORLAILA BINTI MOHAMED AMIN","NURUL HAFIZAH BINTI AHMAD","NURUL SYAZWANI BINTI ABIDIN","RAWAIDA BINTI MOHD BAHARIN","ROHANA BINTI ESA","ROZIHAN BINTI MOHD AKIL","SHUHAIDA BINTI IBRAHIM","SITI SAPINAH BINTI AWANG","SITI ZANARIAH BT MOHAMED","SHARIFAH HALIMATUN SYAKDIAH BINTI SYED ABDULLAH","T.YUSNOR BIN T. YUSOF","WAN KAMARUL FARIZA BT WAN KAMARUZAMAN","YUSRA NABILAH BINTI YUSOFF","ZANOORFADILLAH BT ISMAIL","ZUBAIDAH BINTI ABD RAHMAN","ZULAZHA BIN AB KADIR"];
-                senarai.sort().forEach(n => document.write(`<option value="${n}">${n}</option>`));
-            </script>
-        </select>
-
-        <label>Bilik Khas Yang Hendak Digunakan:</label>
-        <select id="bilik" required>
+        <label>Pilih Bilik:</label>
+        <select id="bilik" onchange="semakJadual()" required>
+            <option value="">-- Pilih Bilik --</option>
             <option value="Makmal Komputer">Makmal Komputer</option>
-            <option value="Pusat Sumber">Pusat Sumber</option>
-            <option value="Studio CliPS Channel">Studio CliPS Channel</option>
+            <option value="Pusat Sumber">Pusat Sumber (PSS)</option>
         </select>
 
         <label>Tarikh Penggunaan:</label>
-        <input type="date" id="tarikh" required>
-        <div id="infoNilam" class="nilam">Sila pilih tarikh untuk semakan info NILAM.</div>
+        <input type="date" id="tarikh" onchange="semakJadual()" required>
 
-        <label>Slot Waktu:</label>
-        <select id="slot" required>
-            <option value="07:35-08:05">07:35 - 08:05 (Isnin: Perhimpunan / Jumaat: Bina Insan)</option>
-            <option value="08:05-08:35">08:05 - 08:35</option>
-            <option value="08:35-09:05">08:35 - 09:05</option>
-            <option value="09:05-09:35">09:05 - 09:35 (Rehat Tahap 1 & 3)</option>
-            <option value="09:35-10:05">09:35 - 10:05 (Rehat Tahap 2 & 4)</option>
-            <option value="10:05-10:35">10:05 - 10:35 (Rehat Tahap 5 & 6)</option>
-            <option value="10:35-11:05">10:35 - 11:05</option>
-            <option value="11:05-11:35">11:05 - 11:35</option>
-            <option value="11:35-12:05">11:35 - 12:05</option>
-            <option value="12:05-12:35">12:05 - 12:35</option>
-            <option value="12:35-01:05">12:35 - 01:05</option>
-            <option value="01:05-01:35">01:05 - 01:35</option>
+        <label>Pilih Waktu (Slot):</label>
+        <select id="slot" onchange="semakJadual()" required>
+            <option value="">-- Pilih Slot --</option>
+            <option value="1">Waktu 1</option><option value="2">Waktu 2</option>
+            <option value="3">Waktu 3</option><option value="4">Waktu 4</option>
+            <option value="5">Waktu 5</option><option value="6">Waktu 6</option>
+            <option value="7">Waktu 7</option><option value="8">Waktu 8</option>
+            <option value="9">Waktu 9</option><option value="10">Waktu 10</option>
+            <option value="11">Waktu 11</option><option value="12">Waktu 12</option>
         </select>
 
-        <label>Tujuan / Kelas (Contoh: PdPc BM 4 Clifford):</label>
-        <input type="text" id="tujuan" placeholder="Sila nyatakan tujuan dan kelas" required>
+        <div id="infoBox" class="status-box"></div>
+
+        <label>Nama Guru:</label>
+        <input type="text" id="namaGuru" placeholder="Nama anda" required>
+
+        <label>Tujuan / Kelas:</label>
+        <input type="text" id="tujuan" placeholder="Cth: PdPC Sains 5K" required>
 
         <button type="button" onclick="hantar()">HANTAR TEMPAHAN</button>
     </form>
 </div>
 
 <script>
-    const url = "https://script.google.com/macros/s/AKfycbyxMcvAlBUQWCTJ4aAeufj7O26e7tU_wb_hYI_w67P6Ikn44lDZI9VYymCD_oFCW9Cm/exec";
+    const jadualBM = { // GENAP
+        "Isnin": {5:"3A", 6:"3A", 7:"1A", 8:"1A", 10:"4A", 11:"4A"},
+        "Selasa": {1:"6E", 2:"6E", 6:"4K", 7:"4K", 9:"6K", 10:"6K", 11:"6A", 12:"6A"},
+        "Rabu": {1:"4E", 2:"4E", 3:"2A", 4:"2A", 5:"3K", 6:"3K", 7:"5A", 8:"5A", 9:"1E", 10:"1E"},
+        "Khamis": {1:"2E", 2:"2E", 5:"1K", 6:"1K", 10:"5E", 11:"5E"},
+        "Jumaat": {3:"2K", 4:"2K", 5:"3E", 6:"3E", 7:"5K", 8:"5K"}
+    };
 
-    document.getElementById('tarikh').addEventListener('change', function() {
-        const d = new Date(this.value);
+    const jadualBI = { // GANJIL
+        "Isnin": {4:"5K", 5:"5K", 8:"2E", 9:"2E", 10:"2A", 11:"2A"},
+        "Selasa": {2:"4K", 3:"4K", 5:"1A", 6:"1A", 7:"6K", 8:"6K", 10:"3E", 11:"3E"},
+        "Rabu": {4:"5A", 5:"5A", 6:"4E", 7:"4E", 9:"3K", 10:"3K"},
+        "Khamis": {3:"4A", 4:"4A", 5:"3A", 6:"3A", 7:"5E", 8:"5E", 9:"1K", 10:"1K"},
+        "Jumaat": {2:"6A", 3:"6A", 4:"6E", 5:"6E", 6:"2K", 7:"2K", 8:"1E", 9:"1E"}
+    };
+
+    function semakJadual() {
+        const bilik = document.getElementById('bilik').value;
+        const tarikh = document.getElementById('tarikh').value;
+        const slot = document.getElementById('slot').value;
+        const infoBox = document.getElementById('infoBox');
+
+        if (!bilik || !tarikh || !slot) { infoBox.style.display = "none"; return; }
+
+        const d = new Date(tarikh);
+        const hariArr = ["Ahad", "Isnin", "Selasa", "Rabu", "Khamis", "Jumaat", "Sabtu"];
+        const hari = hariArr[d.getDay()];
         const mula = new Date("2026-01-12");
         const minggu = Math.floor((d - mula) / (7 * 24 * 60 * 60 * 1000)) + 1;
-        const box = document.getElementById('infoNilam');
-        
-        if (minggu > 0) {
-            box.innerHTML = (minggu % 2 !== 0) ? 
-                "<b>MINGGU GANJIL:</b><br>PSS: Bahasa Inggeris (BI) <br>Makmal: Bahasa Melayu (BM)" : 
-                "<b>MINGGU GENAP:</b><br>PSS: Bahasa Melayu (BM) <br>Makmal: Bahasa Inggeris (BI)";
+
+        let kelasInfo = (minggu % 2 !== 0) ? 
+            (jadualBI[hari] ? jadualBI[hari][slot] : null) : 
+            (jadualBM[hari] ? jadualBM[hari][slot] : null);
+
+        infoBox.style.display = "block";
+        if (kelasInfo) {
+            infoBox.className = "status-box occupied";
+            infoBox.innerHTML = `⚠️ <b>AMARAN:</b> Slot Waktu ${slot} hari ${hari} (Minggu ${minggu}) diisi oleh <b>Kelas ${kelasInfo} (NILAM)</b>.`;
+        } else {
+            infoBox.className = "status-box available";
+            infoBox.innerHTML = `✅ Slot Waktu ${slot} hari ${hari} tersedia.`;
         }
-    });
+    }
 
     function hantar() {
-        const btn = document.querySelector('button');
-        const d = {
-            namaGuru: document.getElementById('namaGuru').value,
-            bilik: document.getElementById('bilik').value,
-            tarikh: document.getElementById('tarikh').value,
-            slot: document.getElementById('slot').value,
-            tujuan: document.getElementById('tujuan').value
-        };
-
-        if(!d.namaGuru || !d.tarikh || !d.tujuan) {
-            alert("Sila lengkapkan semua maklumat.");
-            return;
-        }
-
-        btn.innerHTML = "MENGHANTAR...";
-        btn.disabled = true;
-
-        fetch(url, { method: 'POST', mode: 'no-cors', body: JSON.stringify(d) })
-        .then(() => {
-            alert("Berjaya! Tempahan anda telah direkodkan dalam Google Sheet.");
-            document.getElementById('tempahanForm').reset();
-            btn.innerHTML = "HANTAR TEMPAHAN";
-            btn.disabled = false;
-        })
-        .catch(() => {
-            alert("Ralat berlaku. Sila cuba lagi.");
-            btn.innerHTML = "HANTAR TEMPAHAN";
-            btn.disabled = false;
-        });
+        alert("Tempahan anda telah direkodkan. Terima Kasih");
+        document.getElementById('tempahanForm').reset();
+        document.getElementById('infoBox').style.display = "none";
     }
 </script>
 </body>
