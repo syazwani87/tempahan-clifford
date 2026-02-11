@@ -9,7 +9,6 @@
         .card { background: white; padding: 25px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); max-width: 550px; margin: auto; }
         h2 { text-align: center; color: #1a73e8; font-size: 1.2em; text-transform: uppercase; margin-bottom: 10px; }
         .btn-semak { display: block; text-align: center; background: #34a853; color: white; padding: 12px; text-decoration: none; border-radius: 8px; font-weight: bold; margin-bottom: 20px; font-size: 14px; }
-        .btn-semak:hover { background: #2d9147; }
         label { display: block; margin-top: 15px; font-weight: bold; font-size: 13px; color: #444; }
         select, input[type="text"], input[type="date"] { width: 100%; padding: 12px; margin-top: 5px; border: 1px solid #dadce0; border-radius: 8px; box-sizing: border-box; }
         .slot-container { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
@@ -59,7 +58,7 @@
 <script>
     const masa = ["","07:35-08:05","08:05-08:35","08:35-09:05","09:05-09:35","10:05-10:35","10:35-11:05","11:05-11:35","11:35-12:05","12:05-12:35","12:35-01:05","01:05-01:35","01:35-02:05"];
     
-    // Data Jadual NILAM dari Gambar
+    // Data Jadual NILAM
     const jadualBM = {"Isnin":{5:"3A",6:"3A",7:"1A",8:"1A",10:"4A",11:"4A"},"Selasa":{1:"6E",2:"6E",6:"4K",7:"4K",9:"6K",10:"6K",11:"6A",12:"6A"},"Rabu":{1:"4E",2:"4E",3:"2A",4:"2A",5:"3K",6:"3K",7:"5A",8:"5A",9:"1E",10:"1E"},"Khamis":{1:"2E",2:"2E",5:"1K",6:"1K",10:"5E",11:"5E"},"Jumaat":{3:"2K",4:"2K",5:"3E",6:"3E",7:"5K",8:"5K"}};
     const jadualBI = {"Isnin":{4:"5K",5:"5K",8:"2E",9:"2E",10:"2A",11:"2A"},"Selasa":{2:"4K",3:"4K",5:"1A",6:"1A",7:"6K",8:"6K",10:"3E",11:"3E"},"Rabu":{4:"5A",5:"5A",6:"4E",7:"4E",9:"3K",10:"3K"},"Khamis":{3:"4A",4:"4A",5:"3A",6:"3A",7:"5E",8:"5E",9:"1K",10:"1K"},"Jumaat":{2:"6A",3:"6A",4:"6E",5:"6E",6:"2K",7:"2K",8:"1E",9:"1E"}};
 
@@ -99,7 +98,6 @@
                 </label>`;
         }
         
-        // Slot Tambahan Selepas Sekolah
         container.innerHTML += `
             <label class="slot-item petang">
                 <input type="checkbox" name="sw" value="Lepas Sekolah" onchange="had(this)">
@@ -120,7 +118,6 @@
     function hantar() {
         const terpilih = Array.from(document.querySelectorAll('input[name="sw"]:checked')).map(c => c.value);
         if (terpilih.length === 0) { alert("Sila pilih sekurang-kurangnya 1 waktu."); return; }
-        
         alert("Tempahan anda telah direkodkan. Terima Kasih");
         document.getElementById('tempahanForm').reset();
         document.getElementById('slotGrid').innerHTML = "";
